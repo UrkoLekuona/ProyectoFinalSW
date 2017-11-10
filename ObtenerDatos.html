@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<meta name="tipo_contenido" content="text/html;" http-equiv="content-type" charset="utf-8">
+		<title>Datos usuario</title>
+		<script src="lib/jquery-3.2.1.min.js"></script>
+	</head>
+		<body style="background: url('fotos/fondo.png') no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;">
+		<div align="center">
+		<h1 style="color: white;">Búsqueda de usuarios</h1>
+		<form id='datosusuario' name='datosusuario' action="" method="post" enctype="text/plain">
+						<span style="color: white;">Correo del usuario: </span><input id="correo" name="correo" type="text" style="border-color: black;"/>
+						<br/>
+						<br/>
+						<span style="color: white;">Nombre: </span><input id="nombre" name="nombre" type="text" style="border-color: black;"/>
+						<br/>
+						<br/>
+						<span style="color: white;">Apellidos: </span><input id="apellidos" name="apellidos" type="text" style="border-color: black;"/>
+						<br/>
+						<br/>
+						<span style="color: white;">Número de teléfono: </span><input id="tlf" name="tlf" type="text" style="border-color: black;"/>
+						<br/>
+						<br/>
+						<input type="button" value="Buscar" name="buscar" id="buscar"> 
+						<input type="reset" value="Borrar" name="reset" >
+		</form>
+		</div>
+		<script>
+			$('#buscar').click(function (){
+				$('#nombre').css('border-color','black');
+				$('#apellidos').css('border-color','black');
+				$('#tlf').css('border-color','black');
+				$('#nombre').val('');
+				$('#apellidos').val('');
+				$('#tlf').val('');
+				
+				$.get('usuarios.xml', function(d){
+					$(d).find('usuario').each(function(){
+
+						var $user = $(this); 
+						var email = $user.find('email').text();
+
+						if (email===$('#correo').val()){
+							$('#apellidos').val($user.find('apellido1').text()+' '+$user.find('apellido2').text());
+							$('#nombre').val($user.find('nombre').text());
+							$('#tlf').val($user.find('telefono').text());
+						}
+					});
+					
+					if ($('#nombre').val()===''){
+							alert('El correo ' + $('#correo').val() + ' no existe.');
+							$('#nombre').css('border-color','red');
+							$('#apellidos').css('border-color','red');
+							$('#tlf').css('border-color','red');
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

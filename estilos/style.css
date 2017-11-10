@@ -1,0 +1,41 @@
+@charset "utf-8";
+* 						{margin: 0; padding: 0;}
+body						{font: 16px Georgia, serif;}
+
+#page-wrap				{margin: 2% auto; color: white;}
+#page-wrap >.main 		{border: 1px solid #999; padding: 1%;
+						 margin-bottom: 1px; color: black;}
+
+section > div				{padding: 20px;}
+header, nav, section		{background: #eee; text-align: center;}
+footer					{background: #eee; text-align: center;}
+nav span             				{ margin: 0px 10px 0px 0px;
+						width: 100%;
+						display: inline-block;}
+
+#ErrorMsgs          		 { color: #f61; font-size: smaler}
+
+
+#table-scroll {
+  height:250px;
+  overflow:auto;  
+}
+
+table.scroll {
+    width: 100%; /* Optional */
+    /* border-collapse: collapse; */ 
+    border-spacing: 0;
+    border: 2px solid black;
+	
+}
+
+table.scroll tbody,
+table.scroll thead { display:table-header-group; }
+
+thead tr th { 
+    height: 20px;
+    line-height: 20px;
+}
+
+
+
