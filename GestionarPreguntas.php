@@ -43,22 +43,22 @@
 			?>
 			<h2>Quiz: el juego de las preguntas</h2>
 		</header>
-		<nav class='main' id='n1' role='navigation' style="height: 800px">
+		<nav class='main' id='n1' role='navigation' style="height: 700px">
 			<?php
 			if (strcmp($logged, "True") == 0){
 				echo "<span><a href='layout.php$variables'>Inicio</a></span><span><a href='pregunta.php$variables'>Introducir Preguntas</a></span>
-				<span><a href='VerPreguntasConFoto.php$variables'>Ver Preguntas</a></span><span><a href='creditos.php$variables'>Creditos</a></span>";
+				<span><a href='VerPreguntasConFoto.php$variables'>Ver Preguntas</a></span><span><a href='GestionarPreguntas.php$variables'>Gestionar Preguntas</a></span><span><a href='creditos.php$variables'>Creditos</a></span>";
 
 			}else{
 				echo "<span><a href='layout.php'>Inicio</a></span><span><a href='creditos.php'>Creditos</a></span>";
 			}
 			?>
 		</nav>
-			<section class="main" id="s1" style="height: 800px">
+			<section class="main" id="s1" style="height: 700px">
 				<div>
-					<h4>DATOS DE LA PREGUNTA</h4>
-					<article class="main" id="s2" style="border-style: ridge;border-color: black; border-width:2px;background-color: SandyBrown;height: 275px;">
-						<form id='fpreguntas' name='fpreguntas' action="InsertarPreguntaConFoto.php<?php echo $variables;?>" method="post" enctype="multipart/form-data">
+					<h4>INTRODUCIR PREGUNTA</h4>
+					<article class="main" id="s2" style="border-style: ridge;border-color: black; border-width:2px;background-color: SandyBrown;height: 180px;">
+						<form id='fpreguntas' name='fpreguntas' method='post'>
 							<input type="hidden" id="email" name="email" value="<?php echo $email; ?>" />
 							<br/>
 							Enunciado de la pregunta*: <input id="pregunta" name="pregunta" type="text"/>
@@ -75,11 +75,8 @@
 							<br/>
 							Tema (subject)*: <input id="tema" name="tema" type="text"/>
 							<br/>
-							<input type="file" id="imagen" name="imagen" accept="image/*" onchange="cargarFoto(this)" onload="this.value=null">
-							<br/>
-							<p> <img id = "foto" name="foto"> </p>
-		<!--PONER BUTTON! --><input type="submit" value="Enviar solicitud" name="submit" id="submit"> 
-							<input type="reset" value="Borrar" name="reset" onclick="borrarFoto()">
+							<input type="button" value="Enviar solicitud" name="submit" id="submit"> 
+							<input type="reset" value="Borrar" name="reset">
 						</form>
 					</article>
 				</div>
@@ -88,7 +85,8 @@
 					</br>
 					<input type="button" value="Ver preguntas" name="verP" id="verP" onClick="cargarTabla()"> 
 					</br>
-					<div id="table-scroll"><table id="tabla" class="scroll" border=1 style="display: none;"> <thead><tr><th> Pregunta </th> <th> Respuesta Correcta </th> <th> Respuestas Incorrectas </th> <th> Complejidad </th> <th> Tema </th> <th> Autor </th> 
+					</br>
+					<div id="table-scroll" style="height: 350px;"><table id="tabla" class="scroll" border=1 style="display: none;"> <thead><tr><th> Pregunta </th> <th> Respuesta Correcta </th> <th> Respuestas Incorrectas </th> <th> Complejidad </th> <th> Tema </th> <th> Autor </th> 
 						</tr></thead><tbody>
 					</tbody></table></div>
 				</div>
@@ -99,41 +97,32 @@
 			</footer>
 		</div>
 		<script>
-			function cargarFoto(im){
-				if (im.files && im.files[0]){
-					var reader = new FileReader();
-					reader.onload = function(){
-							var output = document.getElementById("foto");
-							output.src = reader.result;
-					};
-					document.getElementById("n1").style="height: 900px;";
-					document.getElementById("s1").style="height: 900px;";
-					document.getElementById("foto").width=150;
-					document.getElementById("foto").height=150;
-					document.getElementById("foto").style.display="initial";
-					document.getElementById("s2").style="border-style: ridge;border-color: black; border-width:2px;background-color: SandyBrown;height: 380px;";
-					reader.readAsDataURL(im.files[0]);
-				}
-			}
-			
-			function borrarFoto(){
-				document.getElementById("n1").style="height: 800px;";
-				document.getElementById("s1").style="height: 800px;";
-				document.getElementById("foto").style.display = "none";
-				document.getElementById("s2").style="border-style: ridge;border-color: black; border-width:2px;background-color: SandyBrown;height: 275px;";
-			}
-			
 			function cargarTabla(){
 				xmlhttp = new XMLHttpRequest();
 				
 				xmlhttp.onreadystatechange = function (){
 					if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
-						document.getElementById("tabla").style="display: inline-block;";
+						$("#tabla").find('tbody').empty();
+						document.getElementById("tabla").style="display: inline-table;";
+						$("#tabla").find('tbody').append( xmlhttp.responseText );
+						
 					}
 				}
 				xmlhttp.open("GET", "VerPreguntasAJAX.php", true);
 				xmlhttp.send();
 			}
+			
+			$('#submit').click(function(){
+				$.ajax({
+					type: "POST",
+					cache : false,
+					url: 'InsertarPreguntaAJAX.php',
+					data: $('#fpreguntas').serialize(),
+					success: function(data) {
+						alert(data);
+					},
+				});
+			});
 		</script>
 	</body>
 </html>

@@ -1,20 +1,21 @@
 <?php
-		if (strcmp($logged, "True") == 0){
-			$xml = simplexml_load_file("preguntas.xml");
-			$c = 'complexity';
-			$t = 'subject'; 
-			
-			echo '<div id="table-scroll"><table class="scroll" border=1> <thead><tr> <th> Pregunta </th> <th> Complejidad </th> <th> Tema </th> </tr></thead><tbody>';
-			
-			foreach($xml->children() as $child){
-				$comp = $child->attributes()->$c;
-				$tema = $child->attributes()->$t;
-				$pregunta = $child->itemBody->p;
-				echo "<tr><td> $pregunta </td> <td> $comp </td> <td> $tema </td></tr>";
-			}
-			echo '</tbody></table></div>';
+	header("Cache-Control: no-store, no-cache, must-revalidate");
+	
+	$xml = simplexml_load_file("preguntas.xml");
+	$c = 'complexity';
+	$t = 'subject'; 
+	$a = 'author';
+	
+	foreach($xml->children() as $child){
+		$rif = '';
+		$comp = $child->attributes()->$c;
+		$tema = $child->attributes()->$t;
+		$pregunta = $child->itemBody->p;
+		$rc = $child->correctResponse->value;
+		foreach($child->incorrectResponses->children() as $ri){
+			$rif = $rif . $ri . '</br>';
 		}
-		else{
-			echo 'Este contenido solo está disponible para usuarios registrados.';
-		}
+		$autor = $child->attributes()->$a;
+		echo "<tr><td> $pregunta </td> <td> $rc </td> <td> $rif </td> <td> $comp </td> <td> $tema </td> <td> $autor </td></tr>";
+	}
 ?>

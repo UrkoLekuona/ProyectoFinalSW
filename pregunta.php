@@ -47,7 +47,7 @@
 			<?php
 			if (strcmp($logged, "True") == 0){
 				echo "<span><a href='layout.php$variables'>Inicio</a></span><span><a href='pregunta.php$variables'>Introducir Preguntas</a></span>
-				<span><a href='VerPreguntasConFoto.php$variables'>Ver Preguntas</a></span><span><a href='creditos.php$variables'>Creditos</a></span>";
+				<span><a href='VerPreguntasConFoto.php$variables'>Ver Preguntas</a></span><span><a href='GestionarPreguntas.php$variables'>Gestionar Preguntas</a></span><span><a href='creditos.php$variables'>Creditos</a></span>";
 
 			}else{
 				echo "<span><a href='layout.php'>Inicio</a></span><span><a href='creditos.php'>Creditos</a></span>";

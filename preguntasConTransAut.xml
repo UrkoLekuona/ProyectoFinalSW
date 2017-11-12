@@ -1,48 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="VerPreguntas.xsl" ?>
 <assessmentItems>
-  <assessmentItem complexity="2" subject="Web" author="jvadillo001@ikasle.ehu.es">
+  <assessmentItem complexity="4" subject="ajax" author="ulekuona001@ikasle.ehu.es">
     <itemBody>
-      <p>Tag HTML para añadir un formulario</p>
+      <p>prueba ajax definitiva</p>
     </itemBody>
     <correctResponse>
-      <value>
-				FORM
-			</value>
+      <value>terminado</value>
     </correctResponse>
     <incorrectResponses>
-      <value> OBJECT </value>
-      <value> TABLE </value>
-      <value> DIV </value>
+      <value>casi</value>
+      <value>falta bastante</value>
+      <value>sin empezar</value>
     </incorrectResponses>
   </assessmentItem>
-  <assessmentItem complexity="4" subject="Internet" author="rarruabarrena001@ikasle.ehu.eus">
+  <assessmentItem complexity="4" subject="ajax" author="ulekuona001@ikasle.ehu.es">
     <itemBody>
-      <p>Este protocolo acabará funcionando
-			incluso entre dos latas unidas por un cordón</p>
+      <p>prueba ajax definitiva 2</p>
     </itemBody>
     <correctResponse>
-      <value>
-				TCP/IP
-			</value>
+      <value>terminado</value>
     </correctResponse>
     <incorrectResponses>
-      <value> HTTP </value>
-      <value> SMTP </value>
-      <value> Ninguna es correcta </value>
+      <value>casi</value>
+      <value>falta bastante</value>
+      <value>sin empezar</value>
     </incorrectResponses>
   </assessmentItem>
-  <assessmentItem complexity="3" subject="prueba" author="ulekuona001@ikasle.ehu.eus">
+  <assessmentItem complexity="4" subject="ajax" author="ulekuona001@ikasle.ehu.es">
     <itemBody>
-      <p>intento de prueba 5</p>
+      <p>prueba ajax definitiva 3</p>
     </itemBody>
     <correctResponse>
-      <value>si</value>
+      <value>terminado</value>
     </correctResponse>
     <incorrectResponses>
-      <value>no</value>
-      <value>quizas</value>
-      <value>puede</value>
+      <value>casi</value>
+      <value>falta bastante</value>
+      <value>sin empezar</value>
+    </incorrectResponses>
+  </assessmentItem>
+  <assessmentItem complexity="4" subject="ajax" author="ulekuona001@ikasle.ehu.es">
+    <itemBody>
+      <p>prueba ajax definitiva 4</p>
+    </itemBody>
+    <correctResponse>
+      <value>terminado</value>
+    </correctResponse>
+    <incorrectResponses>
+      <value>casi</value>
+      <value>falta bastante</value>
+      <value>sin empezar</value>
+    </incorrectResponses>
+  </assessmentItem>
+  <assessmentItem complexity="4" subject="ajax" author="ulekuona001@ikasle.ehu.es">
+    <itemBody>
+      <p>prueba ajax definitiva 5</p>
+    </itemBody>
+    <correctResponse>
+      <value>terminado</value>
+    </correctResponse>
+    <incorrectResponses>
+      <value>casi</value>
+      <value>falta bastante</value>
+      <value>sin empezar</value>
+    </incorrectResponses>
+  </assessmentItem>
+  <assessmentItem complexity="4" subject="ajax" author="ulekuona001@ikasle.ehu.es">
+    <itemBody>
+      <p>prueba ajax definitiva 6</p>
+    </itemBody>
+    <correctResponse>
+      <value>terminado</value>
+    </correctResponse>
+    <incorrectResponses>
+      <value>casi</value>
+      <value>falta bastante</value>
+      <value>sin empezar</value>
+    </incorrectResponses>
+  </assessmentItem>
+  <assessmentItem complexity="4" subject="ajax" author="ulekuona001@ikasle.ehu.es">
+    <itemBody>
+      <p>prueba ajax definitiva 7</p>
+    </itemBody>
+    <correctResponse>
+      <value>terminado</value>
+    </correctResponse>
+    <incorrectResponses>
+      <value>casi</value>
+      <value>falta bastante</value>
+      <value>sin empezar</value>
     </incorrectResponses>
   </assessmentItem>
 </assessmentItems>

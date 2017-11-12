@@ -30,7 +30,7 @@ table.scroll {
 }
 
 table.scroll tbody,
-table.scroll thead { display:table-header-group; }
+table.scroll thead { display:table-header-group; width: 100%;}
 
 thead tr th { 
     height: 20px;
