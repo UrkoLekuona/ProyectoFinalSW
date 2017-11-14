@@ -35,7 +35,7 @@
 				echo $email;
 				echo " ";
 				echo "<img src=\"./fotos/fotos_usuario/$imagen\" width=30 height=30 />";
-				echo "<span class=\"right\"><a href=\"javascript:alert('Has cerrado sesión');javascript:window.location= 'layout.php'\">Logout</a>";
+				echo "<span class=\"right\"><a href=\"javascript:alert('Has cerrado sesión');javascript:window.location= 'logout.php'\">Logout</a>";
 
 			}else{
 				echo "<span class=\"right\"><a href=\"Registrar.php\">Registrarse</a></span>

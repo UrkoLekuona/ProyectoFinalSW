@@ -31,10 +31,10 @@
 		<header class='main' id='h1'>
 			<?php
 			if (strcmp($logged, "True") == 0){
-				echo $email;
+				echo "<label id=\"emaillog\">$email</label>";
 				echo " ";
 				echo "<img src=\"./fotos/fotos_usuario/$imagen\" width=30 height=30 />";
-				echo "<span class=\"right\"><a href=\"javascript:alert('Has cerrado sesión');javascript:window.location= 'layout.php'\">Logout</a>";
+				echo "<span class=\"right\"><a href=\"javascript:alert('Has cerrado sesión');javascript:window.location= 'logout.php'\">Logout</a>";
 
 			}else{
 				echo "<span class=\"right\"><a href=\"Registrar.php\">Registrarse</a></span>
@@ -43,7 +43,7 @@
 			?>
 			<h2>Quiz: el juego de las preguntas</h2>
 		</header>
-		<nav class='main' id='n1' role='navigation' style="height: 700px">
+		<nav class='main' id='n1' role='navigation' style="height: 800px">
 			<?php
 			if (strcmp($logged, "True") == 0){
 				echo "<span><a href='layout.php$variables'>Inicio</a></span><span><a href='pregunta.php$variables'>Introducir Preguntas</a></span>
@@ -54,7 +54,15 @@
 			}
 			?>
 		</nav>
-			<section class="main" id="s1" style="height: 700px">
+			<section class="main" id="s1" style="height: 800px">
+				<div>
+					<label>Usuarios conectados : </label>
+					<label type="text" id="conectados"></label>
+				</div>
+				<div>
+					<label>Número de preguntas tuyas / totales : </label>
+					<label type="text" id="numPreguntas"></label>
+				</div>
 				<div>
 					<h4>INTRODUCIR PREGUNTA</h4>
 					<article class="main" id="s2" style="border-style: ridge;border-color: black; border-width:2px;background-color: SandyBrown;height: 180px;">
@@ -123,6 +131,19 @@
 					},
 				});
 			});
+
+			function mispreguntas(){
+				var miemail = $('#emaillog').text();
+				$.post('PreguntasUsuarioAJAX.php', {email : miemail}, function(data) {$("#numPreguntas").text(data);});
+			}
+
+			function usuariosConectados(){
+				$.post('NumConectadosAJAX.php', 
+					function(data) {$("#conectados").text(data);});
+			}
+
+			var tmp = setInterval(function(){ mispreguntas() }, 5000);
+			var tmp2 = setInterval(function(){ usuariosConectados() }, 5000);
 		</script>
 	</body>
 </html>

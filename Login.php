@@ -55,6 +55,11 @@
 									$LOGGED = True;
 									$EMAIL = $row['EMAIL'];
 									$IMAGEN = $row['IMAGEN'];
+									$xml = simplexml_load_file("contador.xml");
+
+									$xml->value=$xml->value+1;
+
+									$xml->asXML('contador.xml');
 									echo "<script>alert('Bienvenido, $_POST[nick]!');window.location= 'layout.php?LOGGED=True&EMAIL=$EMAIL&IMAGEN=$IMAGEN'</script>";
 								}
 								else {
