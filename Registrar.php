@@ -49,15 +49,24 @@
 						<input type="submit" value="Enviar solicitud" name="submit" id="submit"> 
 						<input type="reset" value="Borrar" name="reset" onclick="borrarFoto()">
 						<br/>
-						<?php 
+						<?php
+						require_once('/lib/nusoap.php');
+						require_once('/lib/class.wsdlcache.php');
+						
 						if (isset($_POST["email"])){
 							if (strlen($_POST["email"]) == 0){
 								echo "<script type='text/javascript'>alert('El campo del email está vacío');</script>";
 								die();
 							}
-							$pattern='/^[a-z]{2,}[0-9]{3}@ikasle\.ehu\.(eus|es)$/';
+							/*$pattern='/^[a-z]{2,}[0-9]{3}@ikasle\.ehu\.(eus|es)$/';
 							if (preg_match($pattern, $_POST["email"]) === 0){
 								echo "<script type='text/javascript'>alert('El email no es válido, tiene que acabar en @ikasle.ehu.eus o @ikasle.ehu.es');</script>";
+								die();
+							}*/
+							$soapclient= new nusoap_client('http://ehusw.es/jav/ServiciosWeb/comprobarmatricula.php?wsdl', true);
+							$result= $soapclient->call('comprobar', array('x'=>$_POST["email"]));
+							if('NO'===trim($result)){
+								echo "<script type='text/javascript'>alert('El email introducido no es VIP');</script>";
 								die();
 							}
 							if (strlen($_POST["nombre"]) == 0){
@@ -72,15 +81,21 @@
 								echo "<script type='text/javascript'>alert('El campo del nickname está vacío');</script>";
 								die();
 							}
-							if (strlen($_POST["pass"]) < 6){
-								echo "<script type='text/javascript'>alert('El campo de la contraseña no puede tener menos de 6 caracteres');</script>";
+							if (strlen($_POST["pass"]) == 0){
+								echo "<script type='text/javascript'>alert('El campo de la contraseña no puede tener 0 caracteres');</script>";
 								die();
 							}
 							if (strcmp($_POST["pass"], $_POST["pass2"]) != 0){
 								echo "<script type='text/javascript'>alert('Las contraseñas no pueden ser diferentes');</script>";
 								die();
 							}
-								
+							$soapclient2 = new nusoap_client('http://localhost/Lab5/WebServices/samples/comprobarPass.php?wsdl', true);
+							$result= $soapclient->call('comprobarPass', array('x'=>$_POST["pass"]));
+							if('INVALIDA'===trim($result)){
+								echo "<script type='text/javascript'>alert('La contraseña introducida es vulnerable');</script>";
+								die();
+							}
+							
 							include 'connectDB.php';
 							
 							$link = connectDB();
