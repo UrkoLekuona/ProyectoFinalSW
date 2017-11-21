@@ -50,8 +50,7 @@
 						<input type="reset" value="Borrar" name="reset" onclick="borrarFoto()">
 						<br/>
 						<?php
-						require_once('/lib/nusoap.php');
-						require_once('/lib/class.wsdlcache.php');
+						require_once('/lib/nusoap-0.9.5/src/nusoap.php');
 						
 						if (isset($_POST["email"])){
 							if (strlen($_POST["email"]) == 0){
@@ -89,9 +88,12 @@
 								echo "<script type='text/javascript'>alert('Las contraseñas no pueden ser diferentes');</script>";
 								die();
 							}
-							$soapclient2 = new nusoap_client('http://localhost/Lab5/WebServices/samples/comprobarPass.php?wsdl', true);
-							$result= $soapclient->call('comprobarPass', array('x'=>$_POST["pass"]));
-							if('INVALIDA'===trim($result)){
+							$soapclient2 = new nusoap_client('http://localhost/Lab5/WebServices/comprobarPass.php?wsdl', true);
+							$result2= $soapclient2->call('comprobarPass', array('x'=>$_POST["pass"]));
+							$final=trim($result2);
+							/*print_r($result2);
+							die();*/
+							if('INVALIDA'===trim($result2)){
 								echo "<script type='text/javascript'>alert('La contraseña introducida es vulnerable');</script>";
 								die();
 							}

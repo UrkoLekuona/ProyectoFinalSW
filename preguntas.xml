@@ -91,4 +91,17 @@
       <value>4</value>
     </incorrectResponses>
   </assessmentItem>
+  <assessmentItem complexity="4" subject="WS" author="ulekuona001@ikasle.ehu.es">
+    <itemBody>
+      <p>Prueba WS 1</p>
+    </itemBody>
+    <correctResponse>
+      <value>funciona</value>
+    </correctResponse>
+    <incorrectResponses>
+      <value>no</value>
+      <value>creo</value>
+      <value>puede</value>
+    </incorrectResponses>
+  </assessmentItem>
 </assessmentItems>
