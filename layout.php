@@ -1,3 +1,6 @@
+<?PHP
+session_start ();
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,25 +17,13 @@
 		   href='estilos/smartphone.css' />
   </head>
   <body>
-  <?php
-		
-		if (isset($_GET["LOGGED"])){
-			$email=$_GET["EMAIL"];
-			$logged=$_GET["LOGGED"];
-			$imagen=$_GET["IMAGEN"];
-			$variables="?LOGGED=$logged&EMAIL=$email&IMAGEN=$imagen";
-		}
-		else{
-			$logged=false;
-		}
-  ?>
   <div id='page-wrap'>
 	<header class='main' id='h1'>
 		<?php
-			if (strcmp($logged, "True") == 0){
-				echo $email;
+			if (isset($_SESSION['EMAIL'])){
+				echo $_SESSION["EMAIL"];
 				echo " ";
-				echo "<img src=\"./fotos/fotos_usuario/$imagen\" width=30 height=30 />";
+				echo "<img src=\"./fotos/fotos_usuario/$_SESSION[IMAGEN]\" width=30 height=30 />";
 				echo "<a href=\"javascript:alert('Has cerrado sesión');javascript:window.location= 'logout.php'\">Logout</a>";
 
 			}else{
@@ -46,10 +37,12 @@
 	<nav class='main' id='n1' role='navigation'>
 		
 			<?php
-			if (strcmp($logged, "True") == 0){
-				echo "<span><a href='layout.php$variables'>Inicio</a></span><span><a href='pregunta.php$variables'>Introducir Preguntas</a></span>
-				<span><a href='VerPreguntasConFoto.php$variables'>Ver Preguntas</a></span><span><a href='GestionarPreguntas.php$variables'>Gestionar Preguntas</a></span><span><a href='VerPreguntasSW_Cliente.php$variables'>Ver Preguntas Servicio Web</a></span><span><a href='creditos.php$variables'>Creditos</a></span>";
-
+			if (isset($_SESSION['EMAIL']) && $_SESSION['ROL']==0){
+				echo "<span><a href='layout.php'>Inicio</a></span>
+				<span><a href='GestionarPreguntas.php'>Gestionar Preguntas</a></span><span><a href='creditos.php'>Creditos</a></span>";
+			}
+			elseif(isset($_SESSION['EMAIL']) && $_SESSION['ROL']==1){
+				echo "<span><a href='layout.php'>Inicio</a><span><a href='RevisarPreguntas.php'>Revisar Preguntas</a></span><span><a href='creditos.php'>Creditos</a></span>";
 			}else{
 				echo "<span><a href='layout.php'>Inicio</a></span><span><a href='creditos.php'>Creditos</a></span>";
 			}
@@ -61,9 +54,9 @@
 	<div>
 	Bienvenido 
 	 <?php
-		if (strcmp($logged, "True") == 0){
+		if (isset($_SESSION['EMAIL'])){
 			echo " ";
-			echo $email;
+			echo $_SESSION['EMAIL'];
 		}
 	?>
 	</div>

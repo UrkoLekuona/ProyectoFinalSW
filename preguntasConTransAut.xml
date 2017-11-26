@@ -1,107 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <assessmentItems>
-  <assessmentItem complexity="2" subject="ajax" author="aaaa001@ikasle.ehu.es">
+  <assessmentItem id="2" complexity="3" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
     <itemBody>
-      <p>pruena ajax 1</p>
+      <p>Prueba seguridad 1</p>
     </itemBody>
     <correctResponse>
-      <value>1</value>
-    </correctResponse>
-    <incorrectResponses>
-      <value>2</value>
-      <value>4</value>
-      <value>3</value>
-    </incorrectResponses>
-  </assessmentItem>
-  <assessmentItem complexity="5" subject="ajax" author="aaaa001@ikasle.ehu.es">
-    <itemBody>
-      <p>prueba ajax 2</p>
-    </itemBody>
-    <correctResponse>
-      <value>1</value>
-    </correctResponse>
-    <incorrectResponses>
-      <value>2</value>
-      <value>3</value>
-      <value>4</value>
-    </incorrectResponses>
-  </assessmentItem>
-  <assessmentItem complexity="5" subject="ajax" author="inigo121@ikasle.ehu.eus">
-    <itemBody>
-      <p>prueba ajax 3</p>
-    </itemBody>
-    <correctResponse>
-      <value>1</value>
-    </correctResponse>
-    <incorrectResponses>
-      <value>2</value>
-      <value>3</value>
-      <value>4</value>
-    </incorrectResponses>
-  </assessmentItem>
-  <assessmentItem complexity="5" subject="ajax" author="aaaa001@ikasle.ehu.es">
-    <itemBody>
-      <p>prueba ajax 4</p>
-    </itemBody>
-    <correctResponse>
-      <value>1</value>
-    </correctResponse>
-    <incorrectResponses>
-      <value>2</value>
-      <value>3</value>
-      <value>4</value>
-    </incorrectResponses>
-  </assessmentItem>
-  <assessmentItem complexity="5" subject="ajax" author="aaaa001@ikasle.ehu.es">
-    <itemBody>
-      <p>prueba ajax 5</p>
-    </itemBody>
-    <correctResponse>
-      <value>1</value>
-    </correctResponse>
-    <incorrectResponses>
-      <value>2</value>
-      <value>3</value>
-      <value>4</value>
-    </incorrectResponses>
-  </assessmentItem>
-  <assessmentItem complexity="5" subject="ajax" author="aaaa001@ikasle.ehu.es">
-    <itemBody>
-      <p>prueba ajax 6</p>
-    </itemBody>
-    <correctResponse>
-      <value>1</value>
-    </correctResponse>
-    <incorrectResponses>
-      <value>2</value>
-      <value>3</value>
-      <value>4</value>
-    </incorrectResponses>
-  </assessmentItem>
-  <assessmentItem complexity="5" subject="ajax" author="aaaa001@ikasle.ehu.es">
-    <itemBody>
-      <p>prueba ajax 7</p>
-    </itemBody>
-    <correctResponse>
-      <value>1</value>
-    </correctResponse>
-    <incorrectResponses>
-      <value>2</value>
-      <value>3</value>
-      <value>4</value>
-    </incorrectResponses>
-  </assessmentItem>
-  <assessmentItem complexity="4" subject="WS" author="ulekuona001@ikasle.ehu.es">
-    <itemBody>
-      <p>Prueba WS 1</p>
-    </itemBody>
-    <correctResponse>
-      <value>funciona</value>
+      <value>si</value>
     </correctResponse>
     <incorrectResponses>
       <value>no</value>
-      <value>creo</value>
       <value>puede</value>
+      <value>espero</value>
+    </incorrectResponses>
+  </assessmentItem>
+  <assessmentItem id="3" complexity="4" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
+    <itemBody>
+      <p>Prueba seguridad 2</p>
+    </itemBody>
+    <correctResponse>
+      <value>si</value>
+    </correctResponse>
+    <incorrectResponses>
+      <value>no</value>
+      <value>puede</value>
+      <value>espero</value>
+    </incorrectResponses>
+  </assessmentItem>
+  <assessmentItem id="4" complexity="5" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
+    <itemBody>
+      <p>Prueba seguridad 45</p>
+    </itemBody>
+    <correctResponse>
+      <value>BIEN</value>
+    </correctResponse>
+    <incorrectResponses>
+      <value>claro que si pero no</value>
+      <value>puede que no pero al final si</value>
+      <value>creo que no pero si</value>
     </incorrectResponses>
   </assessmentItem>
 </assessmentItems>

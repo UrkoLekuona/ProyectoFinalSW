@@ -82,6 +82,7 @@
 				else{
 					$pregunta = $xml->addChild('assessmentItem');
 					
+					$pregunta->addAttribute('id', $id[0]);
 					$pregunta->addAttribute('complexity', trim($_POST['comp']));
 					$pregunta->addAttribute('subject', trim($_POST['tema']));
 					$pregunta->addAttribute('author', trim($_POST['email']));

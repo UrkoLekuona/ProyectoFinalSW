@@ -1,3 +1,6 @@
+<?PHP
+session_start ();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,26 +18,14 @@
 			<script src="lib/jquery-3.2.1.min.js"></script>
 	</head>
 	 <body>
-	 <?php
-		
-		if (isset($_GET["LOGGED"])){
-			$email=$_GET["EMAIL"];
-			$logged=$_GET["LOGGED"];
-			$imagen=$_GET["IMAGEN"];
-			$variables="?LOGGED=$logged&EMAIL=$email&IMAGEN=$imagen";
-		}
-		else{
-			$logged=false;
-		}
-	?>
 	  <div id='page-wrap'>
 		<header class='main' id='h1'>
 			<?php
-			if (strcmp($logged, "True") == 0){
-				echo "<label id=\"emaillog\">$email</label>";
+			if (isset($_SESSION['EMAIL'])){
+				echo $_SESSION["EMAIL"];
 				echo " ";
-				echo "<img src=\"./fotos/fotos_usuario/$imagen\" width=30 height=30 />";
-				echo "<span class=\"right\"><a href=\"javascript:alert('Has cerrado sesión');javascript:window.location= 'logout.php'\">Logout</a>";
+				echo "<img src=\"./fotos/fotos_usuario/$_SESSION[IMAGEN]\" width=30 height=30 />";
+				echo "<a href=\"javascript:alert('Has cerrado sesión');javascript:window.location= 'logout.php'\">Logout</a>";
 
 			}else{
 				echo "<span class=\"right\"><a href=\"Registrar.php\">Registrarse</a></span>
@@ -45,17 +36,21 @@
 		</header>
 		<nav class='main' id='n1' role='navigation' style="height: 800px">
 			<?php
-			if (strcmp($logged, "True") == 0){
-				echo "<span><a href='layout.php$variables'>Inicio</a></span><span><a href='pregunta.php$variables'>Introducir Preguntas</a></span>
-				<span><a href='VerPreguntasConFoto.php$variables'>Ver Preguntas</a></span><span><a href='GestionarPreguntas.php$variables'>Gestionar Preguntas</a></span><span><a href='VerPreguntasSW_Cliente.php$variables'>Ver Preguntas Servicio Web</a></span><span><a href='creditos.php$variables'>Creditos</a></span>";
-
+			if (isset($_SESSION['EMAIL']) && $_SESSION['ROL']==0){
+				echo "<span><a href='layout.php'>Inicio</a></span>
+				<span><a href='GestionarPreguntas.php'>Gestionar Preguntas</a></span><span><a href='creditos.php'>Creditos</a></span>";
+			}
+			elseif(isset($_SESSION['EMAIL']) && $_SESSION['ROL']==1){
+				echo "<span><a href='layout.php'>Inicio</a><span><a href='RevisarPreguntas.php'>Revisar Preguntas</a></span><span><a href='creditos.php'>Creditos</a></span>";
 			}else{
 				echo "<span><a href='layout.php'>Inicio</a></span><span><a href='creditos.php'>Creditos</a></span>";
 			}
 			?>
 		</nav>
 			<section class="main" id="s1" style="height: 800px">
-				<div>
+				<?php
+					if(isset($_SESSION['EMAIL']) && $_SESSION['ROL']==0){
+						echo '<div>
 					<label>Usuarios conectados : </label>
 					<label type="text" id="conectados"></label>
 				</div>
@@ -66,8 +61,10 @@
 				<div>
 					<h4>INTRODUCIR PREGUNTA</h4>
 					<article class="main" id="s2" style="border-style: ridge;border-color: black; border-width:2px;background-color: SandyBrown;height: 180px;">
-						<form id='fpreguntas' name='fpreguntas' method='post'>
-							<input type="hidden" id="email" name="email" value="<?php echo $email; ?>" />
+						<form id=\'fpreguntas\' name=\'fpreguntas\' method=\'post\'>
+							<input type="hidden" id="email" name="email" value="';
+							echo $_SESSION["EMAIL"];
+							echo '" />
 							<br/>
 							Enunciado de la pregunta*: <input id="pregunta" name="pregunta" type="text"/>
 							<br/>
@@ -97,7 +94,12 @@
 					<div id="table-scroll" style="height: 350px;"><table id="tabla" class="scroll" border=1 style="display: none;"> <thead><tr><th> Pregunta </th> <th> Respuesta Correcta </th> <th> Respuestas Incorrectas </th> <th> Complejidad </th> <th> Tema </th> <th> Autor </th> 
 						</tr></thead><tbody>
 					</tbody></table></div>
-				</div>
+				</div>';
+					}
+					else{
+						header("Location: layout.php");
+					}
+				?>
 			</section>
 			<footer class='main' id='f1' >
 				<p><a href="http://es.wikipedia.org/wiki/Quiz" target="_blank">Que es un Quiz?</a></p>

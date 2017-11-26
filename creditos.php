@@ -1,3 +1,6 @@
+<?PHP
+session_start ();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,26 +22,14 @@
 			<script src="lib/jquery-3.2.1.min.js"></script>
 	</head>
 	 <body>
-	  <?php
-		
-		if (isset($_GET["LOGGED"])){
-			$email=$_GET["EMAIL"];
-			$logged=$_GET["LOGGED"];
-			$imagen=$_GET["IMAGEN"];
-			$variables="?LOGGED=$logged&EMAIL=$email&IMAGEN=$imagen";
-		}
-		else{
-			$logged=false;
-		}
-  ?>
 	  <div id='page-wrap'>
 		<header class='main' id='h1'>
 			<?php
-			if (strcmp($logged, "True") == 0){
-				echo $email;
+			if (isset($_SESSION['EMAIL'])){
+				echo $_SESSION["EMAIL"];
 				echo " ";
-				echo "<img src=\"./fotos/fotos_usuario/$imagen\" width=30 height=30 />";
-				echo "<span class=\"right\"><a href=\"javascript:alert('Has cerrado sesión');javascript:window.location= 'logout.php'\">Logout</a>";
+				echo "<img src=\"./fotos/fotos_usuario/$_SESSION[IMAGEN]\" width=30 height=30 />";
+				echo "<a href=\"javascript:alert('Has cerrado sesión');javascript:window.location= 'logout.php'\">Logout</a>";
 
 			}else{
 				echo "<span class=\"right\"><a href=\"Registrar.php\">Registrarse</a></span>
@@ -50,10 +41,12 @@
 		</header>
 		<nav class='main' id='n1' role='navigation' style="height: 100%;">
 			<?php
-			if (strcmp($logged, "True") == 0){
-				echo "<span><a href='layout.php$variables'>Inicio</a></span><span><a href='pregunta.php$variables'>Introducir Preguntas</a></span>
-				<span><a href='VerPreguntasConFoto.php$variables'>Ver Preguntas</a></span><span><a href='GestionarPreguntas.php$variables'>Gestionar Preguntas</a></span><span><a href='VerPreguntasSW_Cliente.php$variables'>Ver Preguntas Servicio Web</a></span><span><a href='creditos.php$variables'>Creditos</a></span>";
-
+			if (isset($_SESSION['EMAIL']) && $_SESSION['ROL']==0){
+				echo "<span><a href='layout.php'>Inicio</a></span>
+				<span><a href='GestionarPreguntas.php'>Gestionar Preguntas</a></span><span><a href='creditos.php'>Creditos</a></span>";
+			}
+			elseif(isset($_SESSION['EMAIL']) && $_SESSION['ROL']==1){
+				echo "<span><a href='layout.php'>Inicio</a><span><a href='RevisarPreguntas.php'>Revisar Preguntas</a></span><span><a href='creditos.php'>Creditos</a></span>";
 			}else{
 				echo "<span><a href='layout.php'>Inicio</a></span><span><a href='creditos.php'>Creditos</a></span>";
 			}

@@ -1,3 +1,6 @@
+<?PHP
+session_start ();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -31,7 +34,7 @@
 				<article class="main" id="s2" style="border-style: ridge;border-color: black; border-width:2px;background-color: SandyBrown;height: 100px;">
 					<form id='fpreguntas' name='fpreguntas' method="post" enctype="multipart/form-data">
 						<br/>
-						Nickname: <input id="nick" name="nick" type="text"/>
+						Email: <input id="email" name="nick" type="text"/>
 						<br/>
 						Contraseña: <input id="pass" name="pass" type="password"/>
 						<br/>
@@ -46,21 +49,21 @@
 								include 'connectDB.php';
 								
 								$link = connectDB();
-								$sql = mysqli_query($link ,"SELECT EMAIL, IMAGEN FROM user WHERE NICK='$_POST[nick]' AND PASS='$_POST[pass]'");
+								$sql = mysqli_query($link ,"SELECT EMAIL, ROL, IMAGEN FROM user WHERE EMAIL='$_POST[nick]' AND PASS='$_POST[pass]'");
 								$cont= mysqli_num_rows($sql);
 								mysqli_close($link);
 								
 								if($cont==1){
 									$row = mysqli_fetch_array( $sql );
-									$LOGGED = True;
-									$EMAIL = $row['EMAIL'];
-									$IMAGEN = $row['IMAGEN'];
+									$_SESSION['EMAIL'] = $row['EMAIL'];
+									$_SESSION['IMAGEN'] = $row['IMAGEN'];
+									$_SESSION['ROL'] = $row['ROL'];
 									$xml = simplexml_load_file("contador.xml");
 
 									$xml->value=$xml->value+1;
 
 									$xml->asXML('contador.xml');
-									echo "<script>alert('Bienvenido, $_POST[nick]!');window.location= 'layout.php?LOGGED=True&EMAIL=$EMAIL&IMAGEN=$IMAGEN'</script>";
+									echo "<script>alert('Bienvenido, $_SESSION[EMAIL]!');window.location= 'layout.php'</script>";
 								}
 								else {
 									echo ("Parámetros de login incorrectos");
