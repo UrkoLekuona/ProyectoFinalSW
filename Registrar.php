@@ -1,6 +1,5 @@
 <?PHP
 session_start ();
-session_destroy();
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,85 +55,90 @@ session_destroy();
 						<?php
 						require_once('./lib/nusoap-0.9.5/src/nusoap.php');
 						
-						if (isset($_POST["email"])){
-							if (strlen($_POST["email"]) == 0){
-								echo "<script type='text/javascript'>alert('El campo del email está vacío');</script>";
-								die();
-							}
-							/*$pattern='/^[a-z]{2,}[0-9]{3}@ikasle\.ehu\.(eus|es)$/';
-							if (preg_match($pattern, $_POST["email"]) === 0){
-								echo "<script type='text/javascript'>alert('El email no es válido, tiene que acabar en @ikasle.ehu.eus o @ikasle.ehu.es');</script>";
-								die();
-							}*/
-							$soapclient= new nusoap_client('http://ehusw.es/jav/ServiciosWeb/comprobarmatricula.php?wsdl', true);
-							$result= $soapclient->call('comprobar', array('x'=>$_POST["email"]));
-							if('NO'===trim($result)){
-								echo "<script type='text/javascript'>alert('El email introducido no es VIP');</script>";
-								die();
-							}
-							if (strlen($_POST["nombre"]) == 0){
-								echo "<script type='text/javascript'>alert('El campo del nombre está vacío');</script>";
-								die();
-							}
-							if (strlen($_POST["apellidos"]) == 0){
-								echo "<script type='text/javascript'>alert('El campo del apellido está vacío');</script>";
-								die();
-							}
-							if (strlen($_POST["nick"]) == 0){
-								echo "<script type='text/javascript'>alert('El campo del nickname está vacío');</script>";
-								die();
-							}
-							if (strlen($_POST["pass"]) == 0){
-								echo "<script type='text/javascript'>alert('El campo de la contraseña no puede tener 0 caracteres');</script>";
-								die();
-							}
-							if (strcmp($_POST["pass"], $_POST["pass2"]) != 0){
-								echo "<script type='text/javascript'>alert('Las contraseñas no pueden ser diferentes');</script>";
-								die();
-							}
-							$soapclient2 = new nusoap_client('http://localhost/Lab5/WebServices/comprobarPass.php?wsdl', true);
-							$result2= $soapclient2->call('comprobarPass', array('x'=>$_POST["pass"]));
-							$final=trim($result2);
-							/*print_r($result2);
-							die();*/
-							if('INVALIDA'===trim($result2)){
-								echo "<script type='text/javascript'>alert('La contraseña introducida es vulnerable');</script>";
-								die();
-							}
-							
-							include 'connectDB.php';
-							
-							$link = connectDB();
-							$nombreC = $_POST["nombre"] . " " . $_POST["apellidos"];
-							$enc_password = crypt($_POST["pass"], '$5$rounds=5000$usesomesillystringforsalt$');
-							$sql="INSERT INTO user(EMAIL, NOMBRE, NICK, PASS) VALUES ('$_POST[email]', '$nombreC', '$_POST[nick]', '$enc_password')";
+						if(!isset($_SESSION['EMAIL'])){
+							if (isset($_POST["email"])){
+								if (strlen($_POST["email"]) == 0){
+									echo "<script type='text/javascript'>alert('El campo del email está vacío');</script>";
+									die();
+								}
+								/*$pattern='/^[a-z]{2,}[0-9]{3}@ikasle\.ehu\.(eus|es)$/';
+								if (preg_match($pattern, $_POST["email"]) === 0){
+									echo "<script type='text/javascript'>alert('El email no es válido, tiene que acabar en @ikasle.ehu.eus o @ikasle.ehu.es');</script>";
+									die();
+								}*/
+								$soapclient= new nusoap_client('http://ehusw.es/jav/ServiciosWeb/comprobarmatricula.php?wsdl', true);
+								$result= $soapclient->call('comprobar', array('x'=>$_POST["email"]));
+								if('NO'===trim($result)){
+									echo "<script type='text/javascript'>alert('El email introducido no es VIP');</script>";
+									die();
+								}
+								if (strlen($_POST["nombre"]) == 0){
+									echo "<script type='text/javascript'>alert('El campo del nombre está vacío');</script>";
+									die();
+								}
+								if (strlen($_POST["apellidos"]) == 0){
+									echo "<script type='text/javascript'>alert('El campo del apellido está vacío');</script>";
+									die();
+								}
+								if (strlen($_POST["nick"]) == 0){
+									echo "<script type='text/javascript'>alert('El campo del nickname está vacío');</script>";
+									die();
+								}
+								if (strlen($_POST["pass"]) == 0){
+									echo "<script type='text/javascript'>alert('El campo de la contraseña no puede tener 0 caracteres');</script>";
+									die();
+								}
+								if (strcmp($_POST["pass"], $_POST["pass2"]) != 0){
+									echo "<script type='text/javascript'>alert('Las contraseñas no pueden ser diferentes');</script>";
+									die();
+								}
+								$soapclient2 = new nusoap_client('http://localhost/Lab5/WebServices/comprobarPass.php?wsdl', true);
+								$result2= $soapclient2->call('comprobarPass', array('x'=>$_POST["pass"]));
+								$final=trim($result2);
+								/*print_r($result2);
+								die();*/
+								if('INVALIDA'===trim($result2)){
+									echo "<script type='text/javascript'>alert('La contraseña introducida es vulnerable');</script>";
+									die();
+								}
+								
+								include 'connectDB.php';
+								
+								$link = connectDB();
+								$nombreC = $_POST["nombre"] . " " . $_POST["apellidos"];
+								$enc_password = crypt($_POST["pass"], '$5$rounds=5000$usesomesillystringforsalt$');
+								$sql="INSERT INTO user(EMAIL, NOMBRE, NICK, PASS) VALUES ('$_POST[email]', '$nombreC', '$_POST[nick]', '$enc_password')";
 
-							if (!mysqli_query($link ,$sql)){
-									$error = mysqli_error($link);
-									echo "Error: $error";
-							}
-							else{
-								$emailquery = mysqli_query($link, "SELECT EMAIL FROM user WHERE EMAIL='$_POST[email]'" );
-								$email=mysqli_fetch_array( $emailquery );
-								if (isset($_FILES["imagen"]) && ( $_FILES["imagen"]["type"]=="image/jpeg" || $_FILES["imagen"]["type"]=="image/png" || $_FILES["imagen"]["type"]=="image/jpg")){
-									$origen=$_FILES["imagen"]["tmp_name"]; 
-									$imagen="Imagen_".$email[0].select_type($_FILES["imagen"]["type"]);
-									move_uploaded_file($origen, $folder."fotos_usuario/".$imagen);
+								if (!mysqli_query($link ,$sql)){
+										$error = mysqli_error($link);
+										echo "Error: $error";
 								}
 								else{
-									$origen="$folder"."fotos_usuario/"."usuario_def.jpg"; 
-									$imagen="Imagen_".$email[0].".jpg";
-									copy($origen, $folder."fotos_usuario/".$imagen);
+									$emailquery = mysqli_query($link, "SELECT EMAIL FROM user WHERE EMAIL='$_POST[email]'" );
+									$email=mysqli_fetch_array( $emailquery );
+									if (isset($_FILES["imagen"]) && ( $_FILES["imagen"]["type"]=="image/jpeg" || $_FILES["imagen"]["type"]=="image/png" || $_FILES["imagen"]["type"]=="image/jpg")){
+										$origen=$_FILES["imagen"]["tmp_name"]; 
+										$imagen="Imagen_".$email[0].select_type($_FILES["imagen"]["type"]);
+										move_uploaded_file($origen, $folder."fotos_usuario/".$imagen);
+									}
+									else{
+										$origen="$folder"."fotos_usuario/"."usuario_def.jpg"; 
+										$imagen="Imagen_".$email[0].".jpg";
+										copy($origen, $folder."fotos_usuario/".$imagen);
+									}
+									$update="UPDATE user SET IMAGEN='$imagen' WHERE EMAIL='$email[0]'";
+									if (!mysqli_query($link ,$update)){
+										echo 'Error: ' . mysqli_error($link);
+										die();
+									}else{
+										echo "<script type='text/javascript'>alert('Usuario registrado correctamene!');</script>";
+									}
 								}
-								$update="UPDATE user SET IMAGEN='$imagen' WHERE EMAIL='$email[0]'";
-								if (!mysqli_query($link ,$update)){
-									echo 'Error: ' . mysqli_error($link);
-									die();
-								}else{
-									echo "<script type='text/javascript'>alert('Usuario registrado correctamene!');</script>";
-								}
+								mysqli_close($link);
 							}
-							mysqli_close($link);
+						}
+						else{
+							header("Location:layout.php");
 						}
 						
 						function select_type ( $data ) {

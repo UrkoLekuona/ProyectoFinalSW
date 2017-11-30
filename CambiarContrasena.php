@@ -54,63 +54,66 @@ session_start ();
 			<?php
 			require_once('./lib/nusoap-0.9.5/src/nusoap.php');
 			
-			if(isset($_POST["email"])){
-				$encontrado=true;
-				$emailencontrado=$_POST["email"];
-				
-				$soapclient2 = new nusoap_client('http://localhost/LabSeguridad/WebServices/comprobarPass.php?wsdl', true);
-				$result2= $soapclient2->call('comprobarPass', array('x'=>$_POST["pass"]));
-				$final=trim($result2);
-				
-				if (strlen($_POST["pass"]) == 0){
-					echo '<font color="red">El campo de la contraseña no puede tener 0 caracteres</font>';
-				
-				}elseif(strcmp($_POST["pass"],$_POST["pass2"])!=0){
-					echo '<font color="red">Las contraseñas no coinciden</font>';
-				}elseif('INVALIDA'===trim($result2)){
-					echo '<font color="red">La contraseña introducida es vulnerable</font>';
+			if (!isset($_SESSION['EMAIL'])){
+				if(isset($_POST["email"])){
+					$encontrado=true;
+					$emailencontrado=$_POST["email"];
+					
+					$soapclient2 = new nusoap_client('http://localhost/LabSeguridad/WebServices/comprobarPass.php?wsdl', true);
+					$result2= $soapclient2->call('comprobarPass', array('x'=>$_POST["pass"]));
+					$final=trim($result2);
+					
+					if (strlen($_POST["pass"]) == 0){
+						echo '<font color="red">El campo de la contraseña no puede tener 0 caracteres</font>';
+					
+					}elseif(strcmp($_POST["pass"],$_POST["pass2"])!=0){
+						echo '<font color="red">Las contraseñas no coinciden</font>';
+					}elseif('INVALIDA'===trim($result2)){
+						echo '<font color="red">La contraseña introducida es vulnerable</font>';
+					}else{
+						$pass=crypt($_POST["pass"], '$5$rounds=5000$usesomesillystringforsalt$');
+						include 'connectDB.php';
+						$link = connectDB();
+						$sql = mysqli_query($link ,"UPDATE USER SET PASS='$pass' WHERE EMAIL='$_POST[email]'");
+						echo "<script>alert('La contraseña se ha modificado correctamente');window.location= 'Login.php'</script>";
+					}
+					
 				}else{
-					$pass=crypt($_POST["pass"], '$5$rounds=5000$usesomesillystringforsalt$');
 					include 'connectDB.php';
 					$link = connectDB();
-					$sql = mysqli_query($link ,"UPDATE USER SET PASS='$pass' WHERE EMAIL='$_POST[email]'");
-					echo "<script>alert('La contraseña se ha modificado correctamente');window.location= 'Login.php'</script>";
-				}
-				
-			}else{
-				include 'connectDB.php';
-				$link = connectDB();
-				$sql = mysqli_query($link ,"SELECT EMAIL FROM USER");
-				
-				$encontrado=false;
-				
-				while ($row = mysqli_fetch_array( $sql )) {
-					if(strcmp(str_replace('$', '', crypt($row['EMAIL'], 'usesomesillystringforsalt$')), $_GET['email']) == 0){
-						$encontrado=true;
-						$emailencontrado=$row['EMAIL'];
+					$sql = mysqli_query($link ,"SELECT EMAIL FROM USER");
+					
+					$encontrado=false;
+					
+					while ($row = mysqli_fetch_array( $sql )) {
+						if(strcmp(str_replace('$', '', crypt($row['EMAIL'], 'usesomesillystringforsalt$')), $_GET['email']) == 0){
+							$encontrado=true;
+							$emailencontrado=$row['EMAIL'];
+						}
 					}
+					mysqli_close($link);
 				}
-				mysqli_close($link);
+				if($encontrado){
+					echo '<h4>Recuperar Contraseña</h4><article class="main" id="s2" style="border-style: ridge;border-color: black; border-width:2px;background-color: SandyBrown;height: 100px;">
+				<form id="fpreguntas" name="fpreguntas" method="post" enctype="multipart/form-data" action="CambiarContrasena.php">
+					Email: <input id="email" name="email" type="text" readonly="readonly" value=\''.$emailencontrado.'\'/>
+					<br/>
+					Nueva contraseña: <input id="pass" name="pass" type="password"/>
+					<br/>
+					Repetir contraseña: <input id="pass2" name="pass2" type="password"/>
+					</br>
+					<input id="button1" type="submit" value="Guardar contraseña"/>
+				</form>
+				';
+					
+				echo '</article>';
+				}else{
+					echo '</br><h3>Este enlace es inválido</h3>';
+				}
 			}
-			if($encontrado){
-				echo '<h4>Recuperar Contraseña</h4><article class="main" id="s2" style="border-style: ridge;border-color: black; border-width:2px;background-color: SandyBrown;height: 100px;">
-			<form id="fpreguntas" name="fpreguntas" method="post" enctype="multipart/form-data" action="CambiarContrasena.php">
-				Email: <input id="email" name="email" type="text" readonly="readonly" value=\''.$emailencontrado.'\'/>
-				<br/>
-				Nueva contraseña: <input id="pass" name="pass" type="password"/>
-				<br/>
-				Repetir contraseña: <input id="pass2" name="pass2" type="password"/>
-				</br>
-				<input id="button1" type="submit" value="Guardar contraseña"/>
-			</form>
-			';
-				
-			echo '</article>';
-			}else{
-				echo '</br><h3>Este enlace es inválido</h3>';
-			}
-			
-			
+			else{
+				header("Location:layout.php");
+			}	
 			?>
 			
     </section>

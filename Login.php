@@ -41,6 +41,10 @@ session_start ();
 						<input type="submit" value="Enviar solicitud" name="submit" id="submit"> 
 						<br/> 
 						<?php 
+						if(isset($_SESSION['EMAIL'])){
+							header("Location:layout.php");
+						}
+						else{
 							if (isset($_POST["nick"])){
 								if (!isset($_SESSION["intentos"])){
 									$_SESSION["intentos"]=0;
@@ -77,6 +81,7 @@ session_start ();
 									echo ("Has superado el número máximo de intentos para iniciar sesión.");
 								}
 							}
+						}
 						?> 
 					</form>
 				</article>
