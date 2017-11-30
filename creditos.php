@@ -101,10 +101,10 @@ session_start ();
 			</div>
 			<article class="main" id="s2" style="border-style: ridge;border-color: black; border-width:2px;background-color: SandyBrown;">
 			<h1>Petición a un servicio web mediante PHP</h1>
-			<form id='fpreguntas' name='fpreguntas' action="creditos.php<?php echo $variables;?>" method="post" enctype="multipart/form-data">
+			<form id='fpreguntas' name='fpreguntas' action="creditos.php" method="post" enctype="multipart/form-data">
 					<input id="ip" name="ip" type="hidden"/>
 					<?php
-						require_once('/lib/nusoap-0.9.5/src/nusoap.php');
+						require_once('./lib/nusoap-0.9.5/src/nusoap.php');
 								
 						if (isset($_POST["ip"])){
 							$soapclient= new nusoap_client('http://www.webservicex.com/geoipservice.asmx?wsdl', true);

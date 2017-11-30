@@ -1,5 +1,6 @@
 <?PHP
 session_start ();
+session_destroy();
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,7 +54,7 @@ session_start ();
 						<input type="reset" value="Borrar" name="reset" onclick="borrarFoto()">
 						<br/>
 						<?php
-						require_once('/lib/nusoap-0.9.5/src/nusoap.php');
+						require_once('./lib/nusoap-0.9.5/src/nusoap.php');
 						
 						if (isset($_POST["email"])){
 							if (strlen($_POST["email"]) == 0){
@@ -105,7 +106,8 @@ session_start ();
 							
 							$link = connectDB();
 							$nombreC = $_POST["nombre"] . " " . $_POST["apellidos"];
-							$sql="INSERT INTO user(EMAIL, NOMBRE, NICK, PASS) VALUES ('$_POST[email]', '$nombreC', '$_POST[nick]', '$_POST[pass]')";
+							$enc_password = crypt($_POST["pass"], '$5$rounds=5000$usesomesillystringforsalt$');
+							$sql="INSERT INTO user(EMAIL, NOMBRE, NICK, PASS) VALUES ('$_POST[email]', '$nombreC', '$_POST[nick]', '$enc_password')";
 
 							if (!mysqli_query($link ,$sql)){
 									$error = mysqli_error($link);

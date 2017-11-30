@@ -39,4 +39,56 @@
       <value>creo que no pero si</value>
     </incorrectResponses>
   </assessmentItem>
+  <assessmentItem id="5" complexity="2" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
+    <itemBody>
+      <p>prueba seguridad tabla 1</p>
+    </itemBody>
+    <correctResponse>
+      <value>funciona</value>
+    </correctResponse>
+    <incorrectResponses>
+      <value>no</value>
+      <value>funciona</value>
+      <value>bien</value>
+    </incorrectResponses>
+  </assessmentItem>
+  <assessmentItem id="6" complexity="2" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
+    <itemBody>
+      <p>prueba seguridad tabla 2</p>
+    </itemBody>
+    <correctResponse>
+      <value>funciona</value>
+    </correctResponse>
+    <incorrectResponses>
+      <value>no</value>
+      <value>funciona</value>
+      <value>bien</value>
+    </incorrectResponses>
+  </assessmentItem>
+  <assessmentItem id="7" complexity="2" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
+    <itemBody>
+      <p>prueba seguridad tabla 3</p>
+    </itemBody>
+    <correctResponse>
+      <value>funciona</value>
+    </correctResponse>
+    <incorrectResponses>
+      <value>no</value>
+      <value>funciona</value>
+      <value>bien</value>
+    </incorrectResponses>
+  </assessmentItem>
+  <assessmentItem id="8" complexity="5" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
+    <itemBody>
+      <p>pregunta seguridad tabla 5</p>
+    </itemBody>
+    <correctResponse>
+      <value>funciona bien</value>
+    </correctResponse>
+    <incorrectResponses>
+      <value>no</value>
+      <value>funciona</value>
+      <value>bien</value>
+    </incorrectResponses>
+  </assessmentItem>
 </assessmentItems>

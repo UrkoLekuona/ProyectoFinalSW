@@ -1,0 +1,9 @@
+Date: Thu, 30 Nov 2017 16:45:45 +0000
+From: admin@wampserver.invalid
+Subject: Recuperación de contraseña
+To: ulekuona001@ikasle.ehu.eus
+X-PHP-Originating-Script: 0:RecuperarContrasenaAJAX.php
+
+Has solicitado cambiar la contrasena en tu cuenta de https://urkolekuona.000webhostapp.com/ . Haz click en el siguiente enlace para introducir una contrasena nueva: 
+ http://localhost/LabSeguridad/CambiarContrasena.php?email=us9gkoboQZNWc 
+ Si no has solicitado el cambio de contrasena, por favor ignora este mensaje.

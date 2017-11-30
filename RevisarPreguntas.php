@@ -35,7 +35,7 @@ session_start ();
 		
 		<h2>Quiz: el juego de las preguntas</h2>
     </header>
-	<nav class='main' id='n1' role='navigation' style="height: 300px">
+	<nav class='main' id='n1' role='navigation' style="height: 325px">
 		
 			<?php
 			if (isset($_SESSION['EMAIL']) && $_SESSION['ROL']==0){
@@ -50,7 +50,7 @@ session_start ();
 			?>
 			
 	</nav>
-    <section class="main" id="s1" style="height: 300px">
+    <section class="main" id="s1" style="height: 325px">
 		<?php
 		if (isset($_SESSION['EMAIL']) && $_SESSION['ROL']==1){
 			$xml = simplexml_load_file("preguntas.xml");
@@ -76,7 +76,15 @@ session_start ();
 			header("Location: layout.php");
 		}
 		?>
+		<div>
+			<font size=4 color=grey>Nota: Haz click sobre una celda para modificarla</font>
+		</div>
 		<script>
+		$('td').mouseover(function(){
+			if($(this).hasClass("nocambiar")==false){
+				$(this).css('cursor','pointer');
+			}
+		});
 		$('td').click(function(){
 			var td = $(this);
 			var viejovalor = $(this).html();

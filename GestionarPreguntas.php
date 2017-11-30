@@ -135,8 +135,7 @@ session_start ();
 			});
 
 			function mispreguntas(){
-				var miemail = $('#emaillog').text();
-				$.post('PreguntasUsuarioAJAX.php', {email : miemail}, function(data) {$("#numPreguntas").text(data);});
+				$.post('PreguntasUsuarioAJAX.php', {email : '<?php echo $_SESSION["EMAIL"]; ?>'}, function(data) {$("#numPreguntas").text(data);});
 			}
 
 			function usuariosConectados(){
