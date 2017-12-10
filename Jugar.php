@@ -1,5 +1,8 @@
 <?PHP
 session_start ();
+if(isset($_SESSION['EMAIL'])){
+	header("Location:layout.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,7 +45,7 @@ session_start ();
 				<span><a href='GestionarPreguntas.php'>Gestionar Preguntas</a></span><span><a href='creditos.php'>Creditos</a></span>";
 			}
 			elseif(isset($_SESSION['EMAIL']) && $_SESSION['ROL']==1){
-				echo "<span><a href='layout.php'>Inicio</a><span><a href='RevisarPreguntas.php'>Revisar Preguntas</a></span><span><a href='EliminarPregunta.php'>Eliminar Preguntas</a></span><span><a href='creditos.php'>Creditos</a></span>";
+				echo "<span><a href='layout.php'>Inicio</a><span><a href='RevisarPreguntas.php'>Revisar Preguntas</a></span><span><a href='creditos.php'>Creditos</a></span>";
 			}else{
 				echo "<span><a href='layout.php'>Inicio</a></span><span><a href='Jugar.php'>¿Cuánto sabes?. Pruébame
 				</a></span><span><a href='creditos.php'>Creditos</a></span>";
@@ -53,13 +56,7 @@ session_start ();
     <section class="main" id="s1">
     
 	<div>
-	Bienvenido 
-	 <?php
-		if (isset($_SESSION['EMAIL'])){
-			echo " ";
-			echo $_SESSION['EMAIL'];
-		}
-	?>
+	Funcionalidad aún por implementar. Inténtenlo de nuevo más tarde.
 	</div>
     </section>
 	<footer class='main' id='f1'>

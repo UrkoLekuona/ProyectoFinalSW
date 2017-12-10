@@ -1,94 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <assessmentItems>
-  <assessmentItem id="2" complexity="3" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
+  <assessmentItem id="1" complexity="5" subject="prueba" author="ulekuona001@ikasle.ehu.eus">
     <itemBody>
-      <p>Prueba seguridad 1</p>
+      <p>prueba final 1</p>
     </itemBody>
     <correctResponse>
-      <value>si</value>
+      <value>1</value>
     </correctResponse>
     <incorrectResponses>
-      <value>no</value>
-      <value>puede</value>
-      <value>espero</value>
+      <value>2</value>
+      <value>3</value>
+      <value>4</value>
     </incorrectResponses>
   </assessmentItem>
-  <assessmentItem id="3" complexity="4" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
+  <assessmentItem id="2" complexity="5" subject="prueba" author="ulekuona001@ikasle.ehu.eus">
     <itemBody>
-      <p>Prueba seguridad 2</p>
+      <p>prueba final 2</p>
     </itemBody>
     <correctResponse>
-      <value>si</value>
+      <value>1</value>
     </correctResponse>
     <incorrectResponses>
-      <value>no</value>
-      <value>puede</value>
-      <value>espero</value>
+      <value>2</value>
+      <value>3</value>
+      <value>4</value>
     </incorrectResponses>
   </assessmentItem>
-  <assessmentItem id="4" complexity="5" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
+  <assessmentItem id="5" complexity="5" subject="prueba" author="ulekuona001@ikasle.ehu.eus">
     <itemBody>
-      <p>Prueba seguridad 45</p>
+      <p>prueba final 5</p>
     </itemBody>
     <correctResponse>
-      <value>BIEN</value>
+      <value>1</value>
     </correctResponse>
     <incorrectResponses>
-      <value>claro que si pero no</value>
-      <value>puede que no pero al final si</value>
-      <value>creo que no pero si</value>
-    </incorrectResponses>
-  </assessmentItem>
-  <assessmentItem id="5" complexity="2" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
-    <itemBody>
-      <p>prueba seguridad tabla 1</p>
-    </itemBody>
-    <correctResponse>
-      <value>funciona</value>
-    </correctResponse>
-    <incorrectResponses>
-      <value>no</value>
-      <value>funciona</value>
-      <value>bien</value>
-    </incorrectResponses>
-  </assessmentItem>
-  <assessmentItem id="6" complexity="2" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
-    <itemBody>
-      <p>prueba seguridad tabla 2</p>
-    </itemBody>
-    <correctResponse>
-      <value>funciona</value>
-    </correctResponse>
-    <incorrectResponses>
-      <value>no</value>
-      <value>funciona</value>
-      <value>bien</value>
-    </incorrectResponses>
-  </assessmentItem>
-  <assessmentItem id="7" complexity="2" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
-    <itemBody>
-      <p>prueba seguridad tabla 3</p>
-    </itemBody>
-    <correctResponse>
-      <value>funciona</value>
-    </correctResponse>
-    <incorrectResponses>
-      <value>no</value>
-      <value>funciona</value>
-      <value>bien</value>
-    </incorrectResponses>
-  </assessmentItem>
-  <assessmentItem id="8" complexity="5" subject="seguridad" author="ulekuona001@ikasle.ehu.es">
-    <itemBody>
-      <p>pregunta seguridad tabla 5</p>
-    </itemBody>
-    <correctResponse>
-      <value>funciona bien</value>
-    </correctResponse>
-    <incorrectResponses>
-      <value>no</value>
-      <value>funciona</value>
-      <value>bien</value>
+      <value>aja</value>
+      <value>3</value>
+      <value>4</value>
     </incorrectResponses>
   </assessmentItem>
 </assessmentItems>

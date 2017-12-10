@@ -58,7 +58,7 @@ if (!isset($_SESSION['EMAIL']) || $_SESSION['ROL']!=1){
 		if (isset($_SESSION['EMAIL']) && $_SESSION['ROL']==1){
 			$xml = simplexml_load_file("preguntas.xml");
 			
-			echo '<div id="table-scroll"><table class="scroll" border=1> <thead><tr><th> ID </th><th> Autor </th> <th> Pregunta </th> <th> Respuesta Correcta </th><th> Respuesta Incorrecta 1</th><th> Respuesta Incorrecta 2</th><th> Respuesta Incorrecta 3</th><th> Complejidad </th> <th> Tema </th> </tr></thead><tbody align="center">';
+			echo '<div id="table-scroll"><table class="scroll" border=1> <thead><tr><th> ID </th><th> Autor </th> <th> Pregunta </th> <th> Respuesta Correcta </th><th> Respuesta Incorrecta 1</th><th> Respuesta Incorrecta 2</th><th> Respuesta Incorrecta 3</th><th> Complejidad </th> <th> Tema </th> <th> ¿Eliminar Pregunta? </th></tr></thead><tbody align="center">';
 			
 			foreach($xml->children() as $child){
 				$id = $child['id'];
@@ -71,7 +71,7 @@ if (!isset($_SESSION['EMAIL']) || $_SESSION['ROL']!=1){
 				foreach($child->incorrectResponses->children() as $ri){
 					echo "<td> $ri </td>";
 				}
-				echo "<td> $comp </td><td> $tema </td></tr>";
+				echo "<td> $comp </td><td> $tema </td><td> <input type='button' id='$id' value='Eliminar Pregunta'></td></tr>";
 			}
 			echo '</tbody></table></div>';
 		}
@@ -79,49 +79,25 @@ if (!isset($_SESSION['EMAIL']) || $_SESSION['ROL']!=1){
 			header("Location: layout.php");
 		}
 		?>
-		<div>
-			<font size=4 color=grey>Nota: Haz click sobre una celda para modificarla</font>
-		</div>
 		<script>
-		$('td').mouseover(function(){
-			if($(this).hasClass("nocambiar")==false){
-				$(this).css('cursor','pointer');
-			}
-		});
-		$('td').click(function(){
-			var td = $(this);
-			var viejovalor = $(this).html();
-			//console.log(viejovalor);
-			if($(this).hasClass("nocambiar")==false){
-				var answer = prompt("Insertar nuevo valor", '');
-				if(answer != null){ 
-					$(this).html( answer );
-					var $row = $(this).closest("tr");
-					$tds = $row.find("td");
-					
-					var id = parseInt($tds[0].innerHTML);
-					var autor = $tds[1].innerHTML.toString();
-					var pregunta = $tds[2].innerHTML.toString();
-					var rc = $tds[3].innerHTML.toString();
-					var ri1 = $tds[4].innerHTML.toString();
-					var ri2 = $tds[5].innerHTML.toString();
-					var ri3 = $tds[6].innerHTML.toString();
-					var comp = parseInt($tds[7].innerHTML);
-					var tema = $tds[8].innerHTML.toString();
-					
-					$.ajax({
-						type: "POST",
-						cache : false,
-						url: 'ModificarPreguntaAJAX.php',
-						data: { id: id, autor: autor, pregunta: pregunta, rc: rc, ri1: ri1, ri2: ri2, ri3: ri3, comp: comp, tema: tema },
-						success: function(data) {
-							if(data.localeCompare("Pregunta modificada correctamente!") != 0){
-								td.html( viejovalor );
-							}
-							alert(data);
-						},
-					});
-				}	
+		
+		$('input').click(function(e){
+			var $row = $(this).closest("tr");
+			var id = e.target.id;
+			var answer = confirm("Va a eliminar la pregunta " + id + ". ¿Está seguro?");
+			if(answer == true){			
+				$.ajax({
+					type: "POST",
+					cache : false,
+					url: 'EliminarPreguntaAJAX.php',
+					data: { id: id},
+					success: function(data) {
+						if(data.localeCompare("Pregunta eliminada correctamente!") == 0){
+							$row.remove();
+						}
+						alert(data);
+					},
+				});	
 			}
 		});
 		</script>

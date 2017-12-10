@@ -27,6 +27,7 @@ session_start ();
 		</header>
 		<nav class='main' id='n1' role='navigation' style="height: 300px">
 			<span><a href='layout.php'>Inicio</a></span>
+			<span><a href='Jugar.php'>¿Cuánto sabes?. Pruébame</a></span>
 			<span><a href='creditos.php'>Creditos</a></span>
 		</nav>
 			<section class="main" id="s1" style="height: 300px">

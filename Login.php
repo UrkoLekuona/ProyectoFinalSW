@@ -27,6 +27,7 @@ session_start ();
 		</header>
 		<nav class='main' id='n1' role='navigation' style="height: 160px">
 			<span><a href='layout.php'>Inicio</a></span>
+			<span><a href='Jugar.php'>¿Cuánto sabes?. Pruébame</a></span>
 			<span><a href='creditos.php'>Creditos</a></span>
 		</nav>
 			<section class="main" id="s1" style="height: 160px">
@@ -53,6 +54,9 @@ session_start ();
 									include 'connectDB.php';
 									
 									$enc_password = crypt($_POST["pass"], '$5$rounds=5000$usesomesillystringforsalt$');
+									
+									/*echo $enc_password;
+									die();*/
 									
 									$link = connectDB();
 									$sql = mysqli_query($link ,"SELECT EMAIL, ROL, IMAGEN FROM user WHERE EMAIL='$_POST[nick]' AND PASS='$enc_password'");
